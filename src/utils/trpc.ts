@@ -1,7 +1,9 @@
+// Path: src/app/utils/trpc/ts
+
 import { createTRPCNext } from '@trpc/next';
 import { httpBatchLink } from '@trpc/client';
 import superjson from 'superjson';
-import type { AppRouter } from "@/app/api/trpc/[trpc]";
+import {AppRouter} from "@/pages/api/trpc/[trpc]";
 
 export const trpc = createTRPCNext<AppRouter>({
     config() {
