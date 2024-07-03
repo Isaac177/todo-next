@@ -1,4 +1,18 @@
-import { createReactQueryHooks } from '@trpc/react';
-import type { AppRouter } from '@/app/api/trpc/[trpc]';
+import { createTRPCNext } from '@trpc/next';
+import { httpBatchLink } from '@trpc/client';
+import superjson from 'superjson';
+import type { AppRouter } from "@/app/api/trpc/[trpc]";
 
-export const trpc = createReactQueryHooks<AppRouter>();
+export const trpc = createTRPCNext<AppRouter>({
+    config() {
+        return {
+            links: [
+                httpBatchLink({
+                    url: '/api/trpc',
+                }),
+            ],
+            transformer: superjson,
+        };
+    },
+    ssr: false,
+});
